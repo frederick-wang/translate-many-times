@@ -15,11 +15,11 @@ Options:
 也可以用简略形式调用：
 
 ```
-node index.js <文本内容>|<-c|--content) 文本文件路径> [次数]
+node index.js <文本内容|(-c|--content) 文本文件路径> [次数]
 ```
 
 ```
-node index.js [次数] <文本内容>|(-c|--content) 文本文件路径>
+node index.js [次数] <文本内容|(-c|--content) 文本文件路径>
 ```
 
 ## 参考文献
