@@ -1,0 +1,24 @@
+{
+  "name": "translate-many-times",
+  "version": "1.0.0",
+  "description": "用谷歌翻译API翻译文本内容很多次",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "google",
+    "translation"
+  ],
+  "author": "Zhaoji Wang",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  },
+  "dependencies": {
+    "cli-progress": "^3.6.0",
+    "colors": "^1.4.0",
+    "got": "^10.7.0",
+    "minimist": "^1.2.5"
+  }
+}
