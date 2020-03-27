@@ -9,44 +9,52 @@ const cliProgress = require('cli-progress')
 // 解析命令行参数
 const minimist = require('minimist')
 
+// 参数默认值
+const DEFAULT_TIME = 20
+const DEFAULT_CONTENT = '今晚月色真美'
+const DEFAULT_LANGS = 'zh-CN,en'
 // 解析参数
 // 可以直接在参数里输入字符串指定翻译内容，也可以用 -c 或 -content 指定，默认文本为“今晚月色真美”
 // 此外，也可以通过 -f 或者 --file 指定读取文本文件作为翻译内容
 // 可以直接在参数里打数字指定次数，也可以用 -t 或 --time 指定次数，默认次数为 20 次
-const DEFAULT_TIME = 20
-const DEFAULT_CONTENT = '今晚月色真美'
+// 可以通过 -l 或 --langs 指定翻译语言序列
 const args = minimist(process.argv.slice(2))
-let time =
+const time =
   args.t ||
   args.time ||
   args._.filter(v => Number.isInteger(v))[0] ||
   DEFAULT_TIME
 const filePath = args.f || args.file
-let content =
+const content =
   args.c ||
   args.content ||
   (filePath
     ? fs.readFileSync(filePath).toString()
     : args._.filter(v => typeof v === 'string')[0]) ||
   DEFAULT_CONTENT
+const commonSeparators = /,|\||;|\/|\\|\s+/
+const langs = (args.l || args.langs || DEFAULT_LANGS)
+  .split(commonSeparators)
+  .filter(v => v)
 
 ;(async () => {
+  let text = content
   console.log(colors.green('【原话】'))
-  console.log(`${content}`)
+  console.log(`${text}`)
   // 初始化进度条
   const bar = new cliProgress.SingleBar({}, cliProgress.Presets.rect)
   bar.start(time, 0)
   for (let i = 0; i < time; i++) {
-    // 如果是第奇数次，汉译英；如果是第偶数次，英译汉
-    const lang = ['zh-CN', 'en']
-    content = await translate(content, ...(i % 2 ? lang.reverse() : lang))
+    const slIdx = i % langs.length
+    const tlIdx = slIdx < langs.length - 1 ? slIdx + 1 : 0
+    text = await translate(text, langs[slIdx], langs[tlIdx])
     // 更新进度条数值
     bar.update(i + 1)
   }
   // 进度条停止
   bar.stop()
   console.log(colors.red(`【翻译 ${time} 次后的结果】`))
-  console.log(content)
+  console.log(text)
 })()
 
 /**
