@@ -7,9 +7,10 @@
 node index.js [options]
 
 Options:
-  -t, --time  翻译次数，默认为20次
-  -c, --content 翻译的文本内容，默认为“今晚月色真美”
-  -f, --file  文本文件路径（只有content参数为空时才会读取）
+  -t, --time      翻译次数，默认为20次
+  -c, --content   翻译的文本内容，默认为“今晚月色真美”
+  -f, --file      文本文件路径（只有content参数为空时才会读取）
+  -l, --langs     语言序列，默认为 zh-CN,en
 ```
 
 也可以用简略形式调用：
