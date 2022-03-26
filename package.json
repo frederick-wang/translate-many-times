@@ -23,6 +23,6 @@
     "cli-progress": "^3.6.0",
     "colors": "^1.4.0",
     "got": "^10.7.0",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.6"
   }
 }
