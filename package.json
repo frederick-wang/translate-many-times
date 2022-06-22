@@ -22,7 +22,7 @@
   "dependencies": {
     "cli-progress": "^3.6.0",
     "colors": "^1.4.0",
-    "got": "^10.7.0",
+    "got": "^11.8.5",
     "minimist": "^1.2.5"
   }
 }
